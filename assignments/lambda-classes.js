@@ -40,12 +40,10 @@ class Student extends Person {
         this.className = studentAttr.className;
         this.favSubjects = studentAttr.favSubjects;
     }
-    listsSubjects(student, array){
-        return student[array].forEach(function(item, i){
-            console.log(item);
-        });
+    listsSubjects(student){
+        return `${student.favSubjects}`;
     }
-    PRAssignment(student,subject){
+    PRAssignment(student, subject){
         return `${student.name} has submitted a PR for ${subject}.`;
     }
     sprintChallenge(student, subject){
@@ -55,8 +53,30 @@ class Student extends Person {
 
 //Project Manager
 
+class ProjectManager extends Instructor {
+    constructor(projectManagerAttr){
+        super(projectManagerAttr);
+        this.gradClassName = projectManagerAttr.gradClassName;
+        this.favInstructor = projectManagerAttr.favInstructor;
+        this.slackChannel = projectManagerAttr.slackChannel;
+    }
+    standup(channel){
+        return `${this.name} announces to ${channel}, @channel standy times!`;
+    }
+    debugsCode(student, subject){
+        return `${this.name} debugs ${student.name}'s code on ${subject}`;
+    }
+}
 
+//Person objects
 
+const saipher = new Person({
+    name: "Saipher",
+    age: 29,
+    location: "Chicago"
+});
+
+//Instructor Objects
 
 const dan = new Instructor({
     name: 'Dan',
@@ -67,6 +87,7 @@ const dan = new Instructor({
     catchPhrase: 'If you can do the thing, you can get paid to do the thing!',
 });
 
+//Student Objects
 
 const kevin = new Student({
     name: "Kevin",
@@ -77,5 +98,37 @@ const kevin = new Student({
     favSubjects: ['Html', 'CSS', 'JavaScript'],
 });
 
+//ProjectManager Objects
 
+const ben = new ProjectManager({
+    name: "Ben",
+    age: 30,
+    location: "Texas",
+    gender: "M",
+    specialty: "Web Development",
+    favLanguage: "JavaScript",
+    slackChannel: "Web21",
+    catchPhrase: "Ayyyyee let's go!",
+    gradClassName: "WEB17",
+    favInstructor: "Josh"
+  });
 
+console.log(saipher.speak());
+console.log(saipher.age);
+console.log(saipher.location);
+console.log(dan.specialty);
+console.log(dan.favLanguage);
+console.log(dan.catchPhrase);
+console.log(dan.demo("JavaScript-III"))
+console.log(dan.grade(kevin, "JavaScript-IV"))
+console.log(kevin.previousBackground);
+console.log(kevin.className);
+console.log(kevin.favSubjects);
+console.log(kevin.listsSubjects(kevin));
+console.log(kevin.sprintChallenge(kevin, "JavaScript-I"));
+console.log(kevin.PRAssignment(kevin, "JavaScript-II"));
+console.log(ben.catchPhrase);
+console.log(ben.gradClassName);
+console.log(ben.favInstructor);
+console.log(ben.standup(ben.slackChannel));
+console.log(ben.debugsCode(kevin, "JavaScript-IV"));
